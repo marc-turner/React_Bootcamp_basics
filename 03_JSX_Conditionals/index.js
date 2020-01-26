@@ -32,12 +32,22 @@ function getNum() {
 class NumPicker extends React.Component {
     render() {
         const num = getNum();
-        // let msg;
+        let msg;
+        if (num == 7) {
+            msg = (
+                <div>
+                    <h2>NICE!!!</h2>
+                    <img src='https://media.giphy.com/media/KEG5UtvXUD7WPIhhuy/giphy.gif' />
+                </div>
+            );
+        } else {
+            msg = <p>FUCK!</p>;
+        }
 
         return (
             <div>
                 <h1>Your Number is...{num}</h1>
-                <p>{num === 7 ? 'congrats' : 'not lucky'}</p>
+                {msg}
             </div>
         );
     }
