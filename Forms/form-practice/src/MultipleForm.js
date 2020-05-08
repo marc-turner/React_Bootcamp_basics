@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 
-class Form extends Component {
+class MutipleForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             fullName: '',
+            email: '',
+            password: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(e) {
         this.setState({
-            fullName: e.target.value,
+            [e.target.name]: e.target.value,
         });
     }
     handleSubmit(e) {
@@ -23,13 +25,27 @@ class Form extends Component {
     render() {
         return (
             <div>
-                <h1>HOLA FROM FORM</h1>
+                <h1>HOLA FROM MULTIPLE FORM</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor='fullName'>Full Name</label>
                     <input
                         type='text'
-                        id='fullName'
+                        name='fullName'
+                        placeholder='Full Name'
                         value={this.state.fullName}
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        type='email'
+                        name='email'
+                        placeholder='Email'
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                    />
+                    <input
+                        type='password'
+                        name='password'
+                        placeholder='Password'
+                        value={this.state.password}
                         onChange={this.handleChange}
                     />
                     <button>Add!</button>
@@ -41,4 +57,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default MutipleForm;
