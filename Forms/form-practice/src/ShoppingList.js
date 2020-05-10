@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import ShoppingListForm from './ShoppingListForm';
+import { v4 as uuidv4 } from 'uuid';
 
 class ShoppingList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             items: [
-                { name: 'milk', qty: '2 gals' },
-                { name: 'Bread', qty: '2 loaves' },
+                { name: 'milk', qty: '2 gals', id: uuidv4() },
+                { name: 'Bread', qty: '2 loaves', id: uuidv4() },
             ],
         };
+        this.addItem = this.addItem.bind(this);
+    }
+    addItem(item) {
+        let newItem = { ...item, id: uuidv4() };
+        this.setState((state) => ({
+            items: [...state.items, newItem],
+        }));
     }
     renderItems() {
         return (
             <ul>
                 {this.state.items.map((item) => (
-                    <li>
+                    <li key={item.id}>
                         {item.name}:{item.qty}
                     </li>
                 ))}
@@ -27,7 +35,7 @@ class ShoppingList extends Component {
             <div>
                 <h1>Shopping List</h1>
                 {this.renderItems()}
-                <ShoppingListForm />
+                <ShoppingListForm addItem={this.addItem} />
             </div>
         );
     }
